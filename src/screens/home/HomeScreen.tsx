@@ -6,7 +6,9 @@ import {fontFamilies} from '../../constants/fontFamilies';
 import {globalStyles} from '../../styles/globalStyles';
 import {appInfo} from '../../constants/appInfos';
 
-const HomeScreen = ({navigation}: any) => {
+const HomeScreen = () => {
+  const statusBarHeight = StatusBar.currentHeight ?? 24; // Fallback value if StatusBar.currentHeight is undefined
+
   return (
     <View style={[globalStyles.container]}>
       <StatusBar barStyle={'light-content'} />
@@ -14,10 +16,10 @@ const HomeScreen = ({navigation}: any) => {
       <View
         style={{
           backgroundColor: appColors.primary,
-          height: 150,
+          height: statusBarHeight + 150,
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
-          paddingTop: StatusBar.currentHeight,
+          paddingTop: statusBarHeight,
         }}>
         <View style={{paddingHorizontal: 16}}>
           <RowComponent>

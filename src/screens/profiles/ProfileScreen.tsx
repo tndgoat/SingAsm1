@@ -1,33 +1,45 @@
-import {View, Image} from 'react-native';
 import React from 'react';
+import {View, Image} from 'react-native';
+import {ButtonComponent, SpaceComponent, TextComponent} from '../../components';
 import {appColors} from './../../constants/appColors';
 import {appInfo} from '../../constants/appInfos';
 import {fontFamilies} from '../../constants/fontFamilies';
-import {ButtonComponent, SpaceComponent, TextComponent} from '../../components';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}: any) => {
   return (
     <View
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: appColors.primary,
+        backgroundColor: '#1d3867',
       }}>
       <Image
         source={require('../../assets/images/avatar.png')}
         style={{
-          width: appInfo.sizes.WIDTH * 0.7,
+          width: appInfo.sizes.WIDTH * 0.36,
           resizeMode: 'contain',
         }}
       />
-      <SpaceComponent height={25} />
       <TextComponent
         text="Tung Nguyen"
         color={appColors.white}
         size={22}
-        font={fontFamilies.bold}
+        font={fontFamilies.semiBold}
         styles={{textAlign: 'center'}}
+      />
+      <SpaceComponent height={100} />
+      <ButtonComponent
+        color={appColors.white}
+        styles={{
+          width: 263,
+          height: 56,
+          borderRadius: 32,
+        }}
+        onPress={() => navigation.navigate('OnboardingScreen')}
+        text="Logout"
+        type="primary"
+        textColor={appColors.danger}
       />
     </View>
   );

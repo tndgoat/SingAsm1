@@ -1,7 +1,7 @@
 import React from 'react';
 import {ActivityIndicator, Image, View} from 'react-native';
-import {appInfo} from '../constants/appInfos';
 import {SpaceComponent} from '../components';
+import {appInfo} from '../constants/appInfos';
 import {appColors} from '../constants/appColors';
 
 const SplashScreen = () => {
@@ -11,7 +11,7 @@ const SplashScreen = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1D3867',
+        backgroundColor: '#1d3867',
       }}>
       <Image
         source={require('../assets/images/logo-singalarity-2.png')}

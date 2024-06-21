@@ -1,5 +1,4 @@
 import ButtonComponent from './ButtonComponent';
-import CircleComponent from './CircleComponent';
 import ContainerComponent from './ContainerComponent';
 import InputComponent from './InputComponent';
 import RowComponent from './RowComponent';
@@ -9,13 +8,12 @@ import TagBarComponent from './TagBarComponent';
 import TextComponent from './TextComponent';
 
 export {
-  SpaceComponent,
-  TextComponent,
   ButtonComponent,
-  InputComponent,
-  SectionComponent,
   ContainerComponent,
+  InputComponent,
   RowComponent,
-  CircleComponent,
+  SectionComponent,
+  SpaceComponent,
   TagBarComponent,
+  TextComponent,
 };
