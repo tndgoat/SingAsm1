@@ -24,7 +24,7 @@ const HomeScreen = ({navigation}: any) => {
             <View style={[{flex: 1, alignItems: 'center'}]}>
               <TextComponent
                 text="Internship"
-                color={appColors.white2}
+                color={appColors.white}
                 font={fontFamilies.regular}
                 size={12}
               />
