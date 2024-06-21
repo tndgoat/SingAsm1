@@ -1,4 +1,4 @@
-import {Text, StyleProp, TextStyle, Platform} from 'react-native';
+import {Text, StyleProp, TextStyle} from 'react-native';
 import React from 'react';
 import {appColors} from '../constants/appColors';
 import {fontFamilies} from '../constants/fontFamilies';
@@ -18,7 +18,7 @@ interface Props {
 const TextComponent = (props: Props) => {
   const {text, size, flex, font, color, styles, title, numberOfLine} = props;
 
-  const fontSizeDefault = Platform.OS === 'ios' ? 16 : 14;
+  const fontSizeDefault = 14;
 
   return (
     <Text

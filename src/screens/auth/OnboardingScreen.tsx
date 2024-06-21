@@ -10,7 +10,7 @@ const OnboardingScreen = ({navigation}: any) => {
   return (
     <View style={[globalStyles.container, {justifyContent: 'space-between'}]}>
       {/* Logo */}
-      <View style={{alignItems: 'center', marginTop: 200}}>
+      <View style={{alignItems: 'center', marginTop: 100}}>
         <Image
           source={require('../../assets/images/logo-singalarity-1.png')}
           style={{width: appInfo.sizes.WIDTH * 0.6, resizeMode: 'contain'}}

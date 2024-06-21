@@ -17,7 +17,7 @@ const TabNavigator = () => {
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarStyle: {
-          height: Platform.OS === 'ios' ? 88 : 68,
+          height: 68,
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: appColors.white,
