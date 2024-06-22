@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image} from 'react-native';
 import {ButtonComponent, SpaceComponent, TextComponent} from '../../components';
-import {appColors} from './../../constants/appColors';
+import {appColors} from '../../constants/appColors';
 import {appInfo} from '../../constants/appInfos';
 import {fontFamilies} from '../../constants/fontFamilies';
 

@@ -7,13 +7,11 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: appColors.white,
   },
-
   text: {
     fontFamily: fontFamilies.regular,
     fontSize: 14,
     color: appColors.text,
   },
-
   button: {
     borderRadius: 12,
     justifyContent: 'center',
@@ -21,7 +19,6 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: appColors.white,
     paddingHorizontal: 16,
     paddingVertical: 16,
-    // minHeight: 56,
     flexDirection: 'row',
   },
   shadow: {
@@ -34,7 +31,6 @@ export const globalStyles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 6,
   },
-
   section: {
     paddingHorizontal: 16,
     paddingBottom: 20,
@@ -44,7 +40,6 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -53,7 +48,6 @@ export const globalStyles = StyleSheet.create({
     height: 30,
     borderRadius: 100,
   },
-
   tag: {
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -61,7 +55,6 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 100,
     marginRight: 12,
   },
-
   card: {
     padding: 12,
     borderRadius: 12,
