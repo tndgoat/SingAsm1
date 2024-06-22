@@ -58,7 +58,7 @@ const ButtonComponent = (props: Props) => {
               ? color
               : disable
               ? appColors.gray4
-              : appColors.primary,
+              : appColors.darkblue,
           },
           localStyles.button,
           styles,
@@ -79,7 +79,7 @@ const ButtonComponent = (props: Props) => {
       <TextComponent
         flex={0}
         text={text}
-        color={type === 'link' ? appColors.primary : appColors.text}
+        color={type === 'link' ? appColors.darkblue : appColors.text}
       />
     </TouchableOpacity>
   );

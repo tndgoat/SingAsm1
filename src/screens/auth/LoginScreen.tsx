@@ -81,7 +81,7 @@ const LoginScreen = ({navigation}: any) => {
         <RowComponent justify="space-between">
           <RowComponent onPress={() => setIsRemember(!isRemember)}>
             <Switch
-              trackColor={{true: appColors.primary}}
+              trackColor={{true: appColors.darkblue}}
               thumbColor={appColors.white}
               value={isRemember}
               onChange={() => setIsRemember(!isRemember)}

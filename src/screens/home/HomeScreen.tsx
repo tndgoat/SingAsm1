@@ -15,7 +15,7 @@ const HomeScreen = () => {
 
       <View
         style={{
-          backgroundColor: appColors.primary,
+          backgroundColor: appColors.darkblue,
           height: statusBarHeight + 150,
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,

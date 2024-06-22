@@ -27,7 +27,7 @@ const SplashScreen = () => {
 const localStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: appColors.primary,
+    backgroundColor: appColors.darkblue,
   },
   innerContainer: {
     flex: 1,

@@ -24,7 +24,7 @@ const TabNavigator = () => {
         },
         tabBarIcon: ({focused, color, size}) => {
           let icon: ReactNode;
-          color = focused ? appColors.primary : appColors.gray5;
+          color = focused ? appColors.darkblue : appColors.gray5;
           size = 24;
           switch (route.name) {
             case 'Home':
@@ -50,7 +50,7 @@ const TabNavigator = () => {
               text={route.name}
               flex={0}
               size={12}
-              color={focused ? appColors.primary : appColors.gray5}
+              color={focused ? appColors.darkblue : appColors.gray5}
               styles={{
                 marginBottom: Platform.OS === 'android' ? 12 : 0,
               }}
