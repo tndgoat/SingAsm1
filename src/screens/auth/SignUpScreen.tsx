@@ -1,5 +1,6 @@
 import {Lock, Sms, User} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {
   ButtonComponent,
   ContainerComponent,
@@ -13,6 +14,7 @@ import {appColors} from '../../constants/appColors';
 import {LoadingModal} from '../../modals';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
+import {fontFamilies} from '../../constants/fontFamilies';
 
 const initValue = {
   username: '',
@@ -108,9 +110,10 @@ const SignUpScreen = ({navigation}: any) => {
             text="Sign Up"
             size={24}
             title
-            styles={{textAlign: 'center'}}
+            font={fontFamilies.semiBold}
+            styles={localStyles.signuptitle}
           />
-          <SpaceComponent height={21} />
+          <SpaceComponent height={18} />
           <InputComponent
             value={values.username}
             placeholder="Enter your name"
@@ -187,3 +190,9 @@ const SignUpScreen = ({navigation}: any) => {
 };
 
 export default SignUpScreen;
+
+const localStyles = StyleSheet.create({
+  signuptitle: {
+    textAlign: 'center',
+  },
+});

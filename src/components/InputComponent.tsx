@@ -47,7 +47,7 @@ const InputComponent = (props: Props) => {
         placeholder={placeholder ?? ''}
         onChangeText={val => onChange(val)}
         secureTextEntry={isShowPass}
-        placeholderTextColor={'#747688'}
+        placeholderTextColor={'#A1A8B0'}
         keyboardType={type ?? 'default'}
         autoCapitalize="none"
         onEndEditing={onEnd}
@@ -79,15 +79,15 @@ export default InputComponent;
 const localStyles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
-    borderRadius: 12,
+    borderRadius: 24,
     borderWidth: 1,
-    borderColor: appColors.gray3,
+    borderColor: '#E5E7EB',
     width: '100%',
     minHeight: 56,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 15,
-    backgroundColor: appColors.white,
+    backgroundColor: '#F9FAFB',
     marginBottom: 19,
   },
 

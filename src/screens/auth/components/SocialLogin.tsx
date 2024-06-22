@@ -8,12 +8,13 @@ import {
 } from '../../../components';
 import {appColors} from '../../../constants/appColors';
 import {fontFamilies} from '../../../constants/fontFamilies';
+import {StyleSheet} from 'react-native';
 
 const SocialLogin = () => {
   return (
     <SectionComponent>
       <TextComponent
-        styles={{textAlign: 'center'}}
+        styles={localStyles.orText}
         text="OR"
         color={appColors.gray4}
         size={16}
@@ -26,7 +27,7 @@ const SocialLogin = () => {
         color={appColors.white}
         textColor={appColors.text}
         text="Login with Google"
-        textFont={fontFamilies.regular}
+        textFont={fontFamilies.semiBold}
         iconFlex="left"
         icon={<Google />}
       />
@@ -36,7 +37,7 @@ const SocialLogin = () => {
         color={appColors.white}
         textColor={appColors.text}
         text="Login with Apple"
-        textFont={fontFamilies.regular}
+        textFont={fontFamilies.semiBold}
         iconFlex="left"
         icon={<Apple />}
       />
@@ -46,7 +47,7 @@ const SocialLogin = () => {
         color={appColors.white}
         textColor={appColors.text}
         text="Login with Facebook"
-        textFont={fontFamilies.regular}
+        textFont={fontFamilies.semiBold}
         iconFlex="left"
         icon={<Facebook />}
       />
@@ -55,3 +56,9 @@ const SocialLogin = () => {
 };
 
 export default SocialLogin;
+
+const localStyles = StyleSheet.create({
+  orText: {
+    textAlign: 'center',
+  },
+});
