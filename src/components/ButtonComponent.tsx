@@ -85,6 +85,8 @@ const ButtonComponent = (props: Props) => {
   );
 };
 
+export default ButtonComponent;
+
 const localStyles = StyleSheet.create({
   center: {
     alignItems: 'center',
@@ -98,5 +100,3 @@ const localStyles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default ButtonComponent;

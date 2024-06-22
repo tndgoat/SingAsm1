@@ -39,10 +39,10 @@ const InputComponent = (props: Props) => {
   const [isShowPass, setIsShowPass] = useState(isPassword ?? false);
 
   return (
-    <View style={[styles.inputContainer]}>
+    <View style={[localStyles.inputContainer]}>
       {affix ?? affix}
       <TextInput
-        style={[styles.input, globalStyles.text]}
+        style={[localStyles.input, globalStyles.text]}
         value={value}
         placeholder={placeholder ?? ''}
         onChangeText={val => onChange(val)}
@@ -76,7 +76,7 @@ const InputComponent = (props: Props) => {
 
 export default InputComponent;
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     borderRadius: 12,

@@ -4,6 +4,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import React, {ReactNode} from 'react';
 import {globalStyles} from '../styles/globalStyles';
@@ -26,22 +27,23 @@ const ContainerComponent = (props: Props) => {
 
   const navigation: any = useNavigation();
 
+  const returnContainer = isScroll ? (
+    <ScrollView style={localStyles.flex1} showsVerticalScrollIndicator={false}>
+      {children}
+    </ScrollView>
+  ) : (
+    <View style={localStyles.flex1}>{children}</View>
+  );
+
   const headerComponent = () => {
     return (
-      <View style={{flex: 1, paddingTop: 30}}>
+      <View style={localStyles.header}>
         {(title || back) && (
-          <RowComponent
-            styles={{
-              paddingHorizontal: 16,
-              paddingVertical: 10,
-              minWidth: 48,
-              minHeight: 48,
-              justifyContent: 'flex-start',
-            }}>
+          <RowComponent styles={localStyles.rowComponent}>
             {back && (
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
-                style={{marginRight: 12}}>
+                style={localStyles.backButton}>
                 <ArrowLeft size={24} color={appColors.text} />
               </TouchableOpacity>
             )}
@@ -62,20 +64,12 @@ const ContainerComponent = (props: Props) => {
     );
   };
 
-  const returnContainer = isScroll ? (
-    <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-      {children}
-    </ScrollView>
-  ) : (
-    <View style={{flex: 1}}>{children}</View>
-  );
-
   return isImageBackground ? (
     <ImageBackground
       source={require('../assets/images/splash-img.png')}
-      style={{flex: 1}}
-      imageStyle={{flex: 1}}>
-      <SafeAreaView style={{flex: 1}}>{headerComponent()}</SafeAreaView>
+      style={localStyles.flex1}
+      imageStyle={localStyles.flex1}>
+      <SafeAreaView style={localStyles.flex1}>{headerComponent()}</SafeAreaView>
     </ImageBackground>
   ) : (
     <SafeAreaView style={[globalStyles.container]}>
@@ -85,3 +79,23 @@ const ContainerComponent = (props: Props) => {
 };
 
 export default ContainerComponent;
+
+const localStyles = StyleSheet.create({
+  flex1: {
+    flex: 1,
+  },
+  header: {
+    flex: 1,
+    paddingTop: 30,
+  },
+  rowComponent: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    minWidth: 48,
+    minHeight: 48,
+    justifyContent: 'flex-start',
+  },
+  backButton: {
+    marginRight: 12,
+  },
+});
