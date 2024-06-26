@@ -56,21 +56,21 @@ const HomeScreen = () => {
               />
               <TextComponent
                 text="Hi Tung Nguyen"
-                color={appColors.darkblue}
+                color={appColors.text1}
                 size={22}
                 font={fontFamilies.bold}
                 styles={{textAlign: 'center'}}
               />
               <TextComponent
                 text="Happy to see you here."
-                color={appColors.darkblue}
+                color={appColors.text2}
                 size={16}
                 font={fontFamilies.regular}
                 styles={{textAlign: 'center', marginTop: 15}}
               />
               <TextComponent
                 text="Hope you have a nice day. Good luck!"
-                color={appColors.darkblue}
+                color={appColors.text2}
                 size={16}
                 font={fontFamilies.regular}
                 styles={{textAlign: 'center', marginTop: 3}}

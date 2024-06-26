@@ -5,5 +5,5 @@ export const appInfo = {
     WIDTH: Dimensions.get('window').width,
     HEIGHT: Dimensions.get('window').height,
   },
-  // BASE_URL: 'https://mobile-sever.onrender.com',
+  BASE_URL: 'http://localhost:8081',
 };

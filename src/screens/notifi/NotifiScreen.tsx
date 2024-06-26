@@ -16,7 +16,7 @@ const NotifiScreen = () => {
       }}>
       <TextComponent
         text="Notifications"
-        color={appColors.darkblue}
+        color={appColors.text1}
         size={22}
         font={fontFamilies.bold}
         styles={{textAlign: 'center'}}
