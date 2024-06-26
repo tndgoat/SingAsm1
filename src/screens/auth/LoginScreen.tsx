@@ -1,6 +1,7 @@
 import {Lock, Sms} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {Switch, StyleSheet} from 'react-native';
+import {Alert, Switch, StyleSheet} from 'react-native';
+import authenticationAPI from '../../apis/authApi';
 import {
   ButtonComponent,
   ContainerComponent,
@@ -14,12 +15,17 @@ import {appColors} from '../../constants/appColors';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
 import {fontFamilies} from '../../constants/fontFamilies';
+import {useDispatch} from 'react-redux';
+import {addAuth} from '../../redux/reducers/authReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
   const [isDisable, setIsDisable] = useState(true);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const emailValidation = Validate.email(email);
@@ -32,10 +38,26 @@ const LoginScreen = ({navigation}: any) => {
   }, [email, password]);
 
   const handleLogin = async () => {
-    try {
-      navigation.navigate('Main');
-    } catch (error) {
-      console.log(error);
+    const emailValidation = Validate.email(email);
+    if (emailValidation) {
+      try {
+        const res = await authenticationAPI.HandleAuthentication(
+          '/login',
+          {email, password},
+          'post',
+        );
+
+        dispatch(addAuth(res.data));
+
+        await AsyncStorage.setItem(
+          'auth',
+          isRemember ? JSON.stringify(res.data) : email,
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.alert('Email is not correct!');
     }
   };
 

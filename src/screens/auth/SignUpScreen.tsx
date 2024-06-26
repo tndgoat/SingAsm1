@@ -15,6 +15,7 @@ import {LoadingModal} from '../../modals';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
 import {fontFamilies} from '../../constants/fontFamilies';
+import authenticationAPI from '../../apis/authApi';
 
 const initValue = {
   username: '',
@@ -61,9 +62,9 @@ const SignUpScreen = ({navigation}: any) => {
     switch (key) {
       case 'email':
         if (!values.email) {
-          message = `Email is required!`;
+          message = `Email is required!!!`;
         } else if (!Validate.email(values.email)) {
-          message = 'Email is not invalid!';
+          message = 'Email is not invalid!!';
         } else {
           message = '';
         }
@@ -71,14 +72,14 @@ const SignUpScreen = ({navigation}: any) => {
         break;
 
       case 'password':
-        message = !values.password ? `Password is required!` : '';
+        message = !values.password ? `Password is required!!!` : '';
         break;
 
       case 'confirmPassword':
         if (!values.confirmPassword) {
-          message = `Please type confirm password!`;
+          message = `Please type confirm password!!`;
         } else if (values.confirmPassword !== values.password) {
-          message = 'Password is not match!';
+          message = 'Password is not match!!!';
         } else {
           message = '';
         }
@@ -92,10 +93,21 @@ const SignUpScreen = ({navigation}: any) => {
   };
 
   const handleRegister = async () => {
+    const api = `/verification`;
     setIsLoading(true);
     try {
+      const res = await authenticationAPI.HandleAuthentication(
+        api,
+        {email: values.email},
+        'post',
+      );
+
       setIsLoading(false);
-      navigation.navigate('LoginScreen');
+
+      navigation.navigate('Verification', {
+        code: res.data.code,
+        ...values,
+      });
     } catch (error) {
       console.log(error);
       setIsLoading(false);
