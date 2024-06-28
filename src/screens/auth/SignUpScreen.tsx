@@ -1,6 +1,6 @@
 import {Lock, Sms, User} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {
   ButtonComponent,
   ContainerComponent,
@@ -14,12 +14,17 @@ import {appColors} from '../../constants/appColors';
 import {LoadingModal} from '../../modals';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
-import {fontFamilies} from '../../constants/fontFamilies';
 import authenticationAPI from '../../apis/authApi';
+
+interface ErrorMessages {
+  userName: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const initValue = {
   username: '',
-  email: '',
+  userName: '',
   password: '',
   confirmPassword: '',
 };
@@ -30,14 +35,16 @@ const SignUpScreen = ({navigation}: any) => {
   const [errorMessage, setErrorMessage] = useState<any>();
   const [isDisable, setIsDisable] = useState(true);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (
       !errorMessage ||
       (errorMessage &&
-        (errorMessage.email ||
+        (errorMessage.userName ||
           errorMessage.password ||
           errorMessage.confirmPassword)) ||
-      !values.email ||
+      !values.userName ||
       !values.password ||
       !values.confirmPassword
     ) {
@@ -60,11 +67,11 @@ const SignUpScreen = ({navigation}: any) => {
     let message = ``;
 
     switch (key) {
-      case 'email':
-        if (!values.email) {
-          message = `Email is required!!!`;
-        } else if (!Validate.email(values.email)) {
-          message = 'Email is not invalid!!';
+      case 'userName':
+        if (!values.userName) {
+          message = `UserName is required!!!`;
+        } else if (!Validate.userName(values.userName)) {
+          message = 'UserName is not invalid!!';
         } else {
           message = '';
         }
@@ -98,7 +105,7 @@ const SignUpScreen = ({navigation}: any) => {
     try {
       const res = await authenticationAPI.HandleAuthentication(
         api,
-        {email: values.email},
+        {userName: values.userName},
         'post',
       );
 
@@ -118,32 +125,26 @@ const SignUpScreen = ({navigation}: any) => {
     <>
       <ContainerComponent isImageBackground isScroll back>
         <SectionComponent>
-          <TextComponent
-            text="Sign Up"
-            size={24}
-            title
-            font={fontFamilies.semiBold}
-            styles={localStyles.signuptitle}
-          />
-          <SpaceComponent height={18} />
+          <TextComponent size={24} title text="Sign up" />
+          <SpaceComponent height={21} />
           <InputComponent
             value={values.username}
-            placeholder="Enter your name"
+            placeholder="Full name"
             onChange={val => handleChangeValue('username', val)}
             allowClear
             affix={<User size={22} color={appColors.gray} />}
           />
           <InputComponent
-            value={values.email}
-            placeholder="Enter your email"
-            onChange={val => handleChangeValue('email', val)}
+            value={values.userName}
+            placeholder="exampleUserName"
+            onChange={val => handleChangeValue('userName', val)}
             allowClear
             affix={<Sms size={22} color={appColors.gray} />}
-            onEnd={() => formValidator('email')}
+            onEnd={() => formValidator('userName')}
           />
           <InputComponent
             value={values.password}
-            placeholder="Enter your password"
+            placeholder="Password"
             onChange={val => handleChangeValue('password', val)}
             isPassword
             allowClear
@@ -179,22 +180,22 @@ const SignUpScreen = ({navigation}: any) => {
         <SectionComponent>
           <ButtonComponent
             onPress={handleRegister}
-            text="Sign Up"
+            text="SIGN UP"
             disable={isDisable}
             type="primary"
           />
         </SectionComponent>
+        <SocialLogin />
         <SectionComponent>
           <RowComponent justify="center">
-            <TextComponent text="Already have an account? " />
+            <TextComponent text="Don’t have an account? " />
             <ButtonComponent
               type="link"
-              text="Login"
+              text="Sign in"
               onPress={() => navigation.navigate('LoginScreen')}
             />
           </RowComponent>
         </SectionComponent>
-        <SocialLogin />
       </ContainerComponent>
       <LoadingModal visible={isLoading} />
     </>
@@ -202,9 +203,3 @@ const SignUpScreen = ({navigation}: any) => {
 };
 
 export default SignUpScreen;
-
-const localStyles = StyleSheet.create({
-  signuptitle: {
-    textAlign: 'center',
-  },
-});

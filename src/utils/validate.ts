@@ -1,10 +1,9 @@
 export class Validate {
-  static email(mail: string): boolean {
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
-    return emailRegex.test(mail);
-  }
-
-  static password(val: string): boolean {
+  static userName(val: string) {
     return val.length >= 6;
   }
+
+  static password(val: string) {
+    return val.length >= 6;
+  };
 }

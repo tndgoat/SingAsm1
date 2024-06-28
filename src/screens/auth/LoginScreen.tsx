@@ -1,6 +1,6 @@
 import {Lock, Sms} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Switch, StyleSheet} from 'react-native';
+import {Alert, Image, Switch} from 'react-native';
 import authenticationAPI from '../../apis/authApi';
 import {
   ButtonComponent,
@@ -14,13 +14,12 @@ import {
 import {appColors} from '../../constants/appColors';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
-import {fontFamilies} from '../../constants/fontFamilies';
 import {useDispatch} from 'react-redux';
 import {addAuth} from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}: any) => {
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
   const [isDisable, setIsDisable] = useState(true);
@@ -28,22 +27,22 @@ const LoginScreen = ({navigation}: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const emailValidation = Validate.email(email);
+    const userNameValidation = Validate.userName(userName);
 
-    if (!email || !password || !emailValidation) {
+    if (!userName || !password || !userNameValidation) {
       setIsDisable(true);
     } else {
       setIsDisable(false);
     }
-  }, [email, password]);
+  }, [userName, password]);
 
   const handleLogin = async () => {
-    const emailValidation = Validate.email(email);
-    if (emailValidation) {
+    const userNameValidation = Validate.userName(userName);
+    if (userNameValidation) {
       try {
         const res = await authenticationAPI.HandleAuthentication(
           '/login',
-          {email, password},
+          {userName, password},
           'post',
         );
 
@@ -51,37 +50,46 @@ const LoginScreen = ({navigation}: any) => {
 
         await AsyncStorage.setItem(
           'auth',
-          isRemember ? JSON.stringify(res.data) : email,
+          isRemember ? JSON.stringify(res.data) : userName,
         );
       } catch (error) {
         console.log(error);
       }
     } else {
-      Alert.alert('Email is not correct!');
+      Alert.alert('UserName is not correct!!!!');
     }
   };
 
   return (
     <ContainerComponent isImageBackground isScroll back>
-      <SectionComponent>
-        <TextComponent
-          text="Login"
-          size={24}
-          title
-          font={fontFamilies.semiBold}
-          styles={localStyles.logintitle}
+      <SectionComponent
+        styles={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 75,
+        }}>
+        <Image
+          source={require('../../assets/images/logo-singalarity-1.png')}
+          style={{
+            width: 162,
+            height: 114,
+            marginBottom: 30,
+          }}
         />
-        <SpaceComponent height={18} />
+      </SectionComponent>
+      <SectionComponent>
+        <TextComponent size={24} title text="Sign in" />
+        <SpaceComponent height={21} />
         <InputComponent
-          value={email}
-          placeholder="Enter your email"
-          onChange={val => setEmail(val)}
+          value={userName}
+          placeholder="UserName"
+          onChange={val => setUserName(val)}
           allowClear
           affix={<Sms size={22} color={appColors.gray} />}
         />
         <InputComponent
           value={password}
-          placeholder="Enter your password"
+          placeholder="Password"
           onChange={val => setPassword(val)}
           isPassword
           allowClear
@@ -96,13 +104,9 @@ const LoginScreen = ({navigation}: any) => {
               onChange={() => setIsRemember(!isRemember)}
             />
             <SpaceComponent width={4} />
-            <TextComponent text="Remember" />
+            <TextComponent text="Remember me" />
           </RowComponent>
-          <ButtonComponent
-            text="Forgot Password?"
-            onPress={() => navigation.navigate('ForgotPassword')}
-            type="text"
-          />
+          <ButtonComponent text="Forgot Password?" type="text" />
         </RowComponent>
       </SectionComponent>
       <SpaceComponent height={16} />
@@ -110,29 +114,23 @@ const LoginScreen = ({navigation}: any) => {
         <ButtonComponent
           disable={isDisable}
           onPress={handleLogin}
-          text="Login"
+          text="SIGN IN"
           type="primary"
         />
       </SectionComponent>
+      <SocialLogin />
       <SectionComponent>
         <RowComponent justify="center">
           <TextComponent text="Don’t have an account? " />
           <ButtonComponent
             type="link"
-            text="Sign Up"
+            text="Sign up"
             onPress={() => navigation.navigate('SignUpScreen')}
           />
         </RowComponent>
       </SectionComponent>
-      <SocialLogin />
     </ContainerComponent>
   );
 };
 
 export default LoginScreen;
-
-const localStyles = StyleSheet.create({
-  logintitle: {
-    textAlign: 'center',
-  },
-});

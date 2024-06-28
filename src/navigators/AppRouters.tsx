@@ -1,4 +1,6 @@
-import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addAuth, authSelector} from '../redux/reducers/authReducer';
@@ -12,6 +14,7 @@ const AppRouters = () => {
   const {getItem} = useAsyncStorage('auth');
 
   const auth = useSelector(authSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const AppRouters = () => {
     <>
       {isShowSplash ? (
         <SplashScreen />
-      ) : auth.accesstoken ? (
+      ) : auth.SessionId ? (
         <MainNavigator />
       ) : (
         <AuthNavigator />

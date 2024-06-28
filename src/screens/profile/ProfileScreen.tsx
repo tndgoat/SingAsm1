@@ -4,8 +4,13 @@ import {ButtonComponent, SpaceComponent, TextComponent} from '../../components';
 import {appColors} from '../../constants/appColors';
 import {appInfo} from '../../constants/appInfos';
 import {fontFamilies} from '../../constants/fontFamilies';
+import {LoginManager} from 'react-native-fbsdk-next';
+import {useDispatch} from 'react-redux';
+import {removeAuth} from '../../redux/reducers/authReducer';
 
-const ProfileScreen = ({navigation}: any) => {
+const ProfileScreen = () => {
+  const dispatch = useDispatch();
+
   return (
     <View
       style={{
@@ -30,16 +35,12 @@ const ProfileScreen = ({navigation}: any) => {
       />
       <SpaceComponent height={100} />
       <ButtonComponent
-        color={appColors.white}
-        styles={{
-          width: 263,
-          height: 56,
-          borderRadius: 32,
-        }}
-        onPress={() => navigation.navigate('OnboardingScreen')}
-        text="Logout"
         type="primary"
-        textColor={appColors.danger}
+        text="Logout"
+        onPress={async () => {
+          await LoginManager.logOut();
+          dispatch(removeAuth({}));
+        }}
       />
     </View>
   );

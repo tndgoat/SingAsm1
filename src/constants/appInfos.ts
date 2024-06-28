@@ -5,5 +5,5 @@ export const appInfo = {
     WIDTH: Dimensions.get('window').width,
     HEIGHT: Dimensions.get('window').height,
   },
-  BASE_URL: 'http://localhost:8080',
+  BASE_URL: 'http://verh.assignsing.store/api',
 };
