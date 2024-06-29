@@ -17,6 +17,7 @@ import SocialLogin from './components/SocialLogin';
 import {useDispatch} from 'react-redux';
 import {addAuth} from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {fontFamilies} from '../../constants/fontFamilies';
 
 const LoginScreen = ({navigation}: any) => {
   const [userName, setUserName] = useState('');
@@ -56,7 +57,7 @@ const LoginScreen = ({navigation}: any) => {
         console.log(error);
       }
     } else {
-      Alert.alert('UserName is not correct!!!!');
+      Alert.alert('Username is not correct!!!!');
     }
   };
 
@@ -66,30 +67,35 @@ const LoginScreen = ({navigation}: any) => {
         styles={{
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 75,
         }}>
         <Image
           source={require('../../assets/images/logo-singalarity-1.png')}
           style={{
-            width: 162,
-            height: 114,
-            marginBottom: 30,
+            width: 180,
+            height: 90.4,
           }}
         />
       </SectionComponent>
       <SectionComponent>
-        <TextComponent size={24} title text="Sign in" />
+        <TextComponent
+          size={24}
+          title
+          text="Login"
+          font={fontFamilies.semiBold}
+          color={appColors.text1}
+          styles={{textAlign: 'center'}}
+        />
         <SpaceComponent height={21} />
         <InputComponent
           value={userName}
-          placeholder="UserName"
+          placeholder="Enter your username"
           onChange={val => setUserName(val)}
           allowClear
           affix={<Sms size={22} color={appColors.gray} />}
         />
         <InputComponent
           value={password}
-          placeholder="Password"
+          placeholder="Enter your password"
           onChange={val => setPassword(val)}
           isPassword
           allowClear
@@ -114,21 +120,21 @@ const LoginScreen = ({navigation}: any) => {
         <ButtonComponent
           disable={isDisable}
           onPress={handleLogin}
-          text="SIGN IN"
+          text="Login"
           type="primary"
         />
       </SectionComponent>
-      <SocialLogin />
       <SectionComponent>
         <RowComponent justify="center">
           <TextComponent text="Don’t have an account? " />
           <ButtonComponent
             type="link"
-            text="Sign up"
+            text="Sign Up"
             onPress={() => navigation.navigate('SignUpScreen')}
           />
         </RowComponent>
       </SectionComponent>
+      <SocialLogin />
     </ContainerComponent>
   );
 };

@@ -1,5 +1,6 @@
 import {Lock, Sms, User} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
+import {Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {
   ButtonComponent,
@@ -15,15 +16,13 @@ import {LoadingModal} from '../../modals';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
 import authenticationAPI from '../../apis/authApi';
-
-interface ErrorMessages {
-  userName: string;
-  password: string;
-  confirmPassword: string;
-}
+import {fontFamilies} from '../../constants/fontFamilies';
+import {addAuth} from '../../redux/reducers/authReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initValue = {
-  username: '',
+  firstName: '',
+  lastName: '',
   userName: '',
   password: '',
   confirmPassword: '',
@@ -69,74 +68,103 @@ const SignUpScreen = ({navigation}: any) => {
     switch (key) {
       case 'userName':
         if (!values.userName) {
-          message = `UserName is required!!!`;
+          message = `UserName is required!`;
         } else if (!Validate.userName(values.userName)) {
-          message = 'UserName is not invalid!!';
+          message = 'UserName is not invalid!';
         } else {
           message = '';
         }
-
         break;
 
       case 'password':
-        message = !values.password ? `Password is required!!!` : '';
+        message = !values.password ? `Password is required!` : '';
         break;
 
       case 'confirmPassword':
         if (!values.confirmPassword) {
-          message = `Please type confirm password!!`;
+          message = `Please type confirm password!`;
         } else if (values.confirmPassword !== values.password) {
-          message = 'Password is not match!!!';
+          message = 'Password is not match!';
         } else {
           message = '';
         }
-
         break;
     }
 
     data[`${key}`] = message;
-
     setErrorMessage(data);
   };
 
   const handleRegister = async () => {
-    const api = `/verification`;
-    setIsLoading(true);
+    setErrorMessage('');
+
+    const api = `/register`;
+    const data = {
+      userName: values.userName,
+      password: values.password,
+      firstName: values.firstName ?? '',
+      lastName: values.lastName ?? '',
+    };
+
     try {
       const res = await authenticationAPI.HandleAuthentication(
         api,
-        {userName: values.userName},
+        data,
         'post',
       );
-
-      setIsLoading(false);
-
-      navigation.navigate('Verification', {
-        code: res.data.code,
-        ...values,
-      });
+      console.log('Response from API:', res);
+      navigation.navigate('LoginScreen');
     } catch (error) {
-      console.log(error);
-      setIsLoading(false);
+      const errorMessage = 'User has already exist!';
+      setErrorMessage(errorMessage);
+      console.log(`Can not create new user: ${JSON.stringify(error)}`);
+      navigation.navigate('LoginScreen');
     }
   };
 
   return (
     <>
       <ContainerComponent isImageBackground isScroll back>
+        <SectionComponent
+          styles={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../../assets/images/logo-singalarity-1.png')}
+            style={{
+              width: 180,
+              height: 90.4,
+            }}
+          />
+        </SectionComponent>
         <SectionComponent>
-          <TextComponent size={24} title text="Sign up" />
+          <TextComponent
+            size={24}
+            title
+            text="Sign Up"
+            font={fontFamilies.semiBold}
+            color={appColors.text1}
+            styles={{textAlign: 'center'}}
+          />
           <SpaceComponent height={21} />
           <InputComponent
-            value={values.username}
-            placeholder="Full name"
-            onChange={val => handleChangeValue('username', val)}
+            value={values.firstName}
+            placeholder="Enter your firstname"
+            onChange={val => handleChangeValue('firstName', val)}
+            allowClear
+            affix={<User size={22} color={appColors.gray} />}
+          />
+          <InputComponent
+            value={values.lastName}
+            placeholder="Enter your lastname"
+            onChange={val => handleChangeValue('lastName', val)}
             allowClear
             affix={<User size={22} color={appColors.gray} />}
           />
           <InputComponent
             value={values.userName}
-            placeholder="exampleUserName"
+            placeholder="Enter your username"
             onChange={val => handleChangeValue('userName', val)}
             allowClear
             affix={<Sms size={22} color={appColors.gray} />}
@@ -144,7 +172,7 @@ const SignUpScreen = ({navigation}: any) => {
           />
           <InputComponent
             value={values.password}
-            placeholder="Password"
+            placeholder="Enter your password"
             onChange={val => handleChangeValue('password', val)}
             isPassword
             allowClear
@@ -180,22 +208,22 @@ const SignUpScreen = ({navigation}: any) => {
         <SectionComponent>
           <ButtonComponent
             onPress={handleRegister}
-            text="SIGN UP"
+            text="Sign Up"
             disable={isDisable}
             type="primary"
           />
         </SectionComponent>
-        <SocialLogin />
         <SectionComponent>
           <RowComponent justify="center">
-            <TextComponent text="Don’t have an account? " />
+            <TextComponent text="Already have an account? " />
             <ButtonComponent
               type="link"
-              text="Sign in"
+              text="Login"
               onPress={() => navigation.navigate('LoginScreen')}
             />
           </RowComponent>
         </SectionComponent>
+        <SocialLogin />
       </ContainerComponent>
       <LoadingModal visible={isLoading} />
     </>

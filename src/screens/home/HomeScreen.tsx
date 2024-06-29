@@ -67,7 +67,7 @@ const HomeScreen = () => {
                 font={fontFamilies.bold}
                 size={24}
               />
-              <SpaceComponent height={36} />
+              <SpaceComponent height={24} />
               <Image
                 source={require('../../assets/images/logo-singalarity-1.png')}
                 style={{
@@ -76,7 +76,7 @@ const HomeScreen = () => {
                 }}
               />
               <TextComponent
-                text="Hi Tung Nguyen!"
+                text="Hi there!"
                 color={appColors.text1}
                 size={22}
                 font={fontFamilies.bold}
@@ -87,16 +87,16 @@ const HomeScreen = () => {
                 color={appColors.text2}
                 size={16}
                 font={fontFamilies.regular}
-                styles={{textAlign: 'center', marginTop: 15}}
+                styles={{textAlign: 'center', marginTop: 10}}
               />
               <TextComponent
                 text="Hope you have a nice day. Good luck!"
                 color={appColors.text2}
                 size={16}
                 font={fontFamilies.regular}
-                styles={{textAlign: 'center', marginTop: 3}}
+                styles={{textAlign: 'center', marginTop: 2}}
               />
-              <SpaceComponent height={48} />
+              <SpaceComponent height={64} />
               <TextComponent
                 text="SHA-256 Fingerprint:"
                 color={appColors.text1}
@@ -109,7 +109,7 @@ const HomeScreen = () => {
                 color={appColors.text2}
                 size={17}
                 font={fontFamilies.regular}
-                styles={{textAlign: 'center', marginTop: 3}}
+                styles={{textAlign: 'center', marginTop: 10}}
               />
             </View>
           </RowComponent>

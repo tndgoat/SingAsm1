@@ -7,28 +7,31 @@ const axiosClient = axios.create({
   paramsSerializer: params => queryString.stringify(params),
 });
 
-axiosClient.interceptors.request.use(async (config: any) => {
-  config.headers = {
-    Authorization: '',
-    Accept: 'application/json',
-    ...config.headers,
-  };
-
-  config.data;
-  return config;
-});
+axiosClient.interceptors.request.use(
+  async (config: any) => {
+    config.headers = {
+      Authorization: '',
+      Accept: 'application/json',
+      ...config.headers,
+    };
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 axiosClient.interceptors.response.use(
   res => {
     if (res.data && res.status === 200) {
       return res.data;
     }
-    throw new Error('Error');
+    return Promise.reject(new Error('Error in response'));
   },
   error => {
-    console.log(`Error api ${JSON.stringify(error)}`);
-    throw new Error(error.response);
-  },
+    console.log(`Error api ${JSON.stringify(error.response)}`);
+    return Promise.reject(error);
+  }
 );
 
 export default axiosClient;

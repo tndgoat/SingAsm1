@@ -3,11 +3,13 @@ import {createSlice} from '@reduxjs/toolkit';
 interface AuthState {
   Success: string;
   SessionId: string;
+  error: string;
 }
 
 const initialState: AuthState = {
   Success: '',
   SessionId: '',
+  error: '',
 };
 
 const authSlice = createSlice({
