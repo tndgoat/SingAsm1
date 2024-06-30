@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "736219900397",
+    "project_id": "tndgoatfirebase",
+    "storage_bucket": "tndgoatfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736219900397:android:7b10f56a78f3c4b48d5fe4",
+        "android_client_info": {
+          "package_name": "com.singasm1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhul89bMj5SJyo6XuIMYe59HpE-yO9Aa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736219900397:android:b728b8e1a80c63fc8d5fe4",
+        "android_client_info": {
+          "package_name": "com.tndgoatfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhul89bMj5SJyo6XuIMYe59HpE-yO9Aa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
